@@ -1,0 +1,55 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": {
+    "text": "诚实呈现：纽约Airbnb价格与评论数分布密度",
+    "subtitle": [
+      "使用2D分箱（Binned）密度图避开散点重叠问题",
+      "数据来源: AB_NYC_2019"
+    ],
+    "anchor": "start",
+    "fontSize": 16
+  },
+  "data": {
+    "url": "AB_NYC_2019.csv"
+  },
+  "transform": [
+    {
+      "filter": "datum.price > 0 && datum.price < 800"
+    }
+  ],
+  "width": 500,
+  "height": 400,
+  "mark": "rect",
+  "encoding": {
+    "x": {
+      "field": "price",
+      "type": "quantitative",
+      "bin": {
+        "maxbins": 50
+      },
+      "title": "价格 (USD)"
+    },
+    "y": {
+      "field": "number_of_reviews",
+      "type": "quantitative",
+      "bin": {
+        "maxbins": 50
+      },
+      "title": "评论数量"
+    },
+    "color": {
+      "aggregate": "count",
+      "type": "quantitative",
+      "scale": {
+        "type": "log",
+        "scheme": "viridis"
+      },
+      "title": "房源聚集数量 (对数)"
+    }
+  },
+  "config": {
+    "view": {
+      "stroke": "transparent"
+    }
+  }
+}

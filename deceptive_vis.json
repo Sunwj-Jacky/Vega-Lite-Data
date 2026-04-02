@@ -1,0 +1,54 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": {
+    "text": "误导呈现：高价房源的热度趋势分析",
+    "subtitle": [
+      "视觉暗示高价房源普遍拥有极高的评论数和活跃度",
+      "注意：此图利用了渲染层级遮挡效应"
+    ],
+    "anchor": "start",
+    "fontSize": 16
+  },
+  "data": {
+    "url": "AB_NYC_2019.csv"
+  },
+  "transform": [
+    {
+      "filter": "datum.price > 0 && datum.price < 800"
+    }
+  ],
+  "width": 500,
+  "height": 400,
+  "mark": {
+    "type": "circle",
+    "opacity": 1,
+    "size": 80,
+    "stroke": "white",
+    "strokeWidth": 0.2
+  },
+  "encoding": {
+    "x": {
+      "field": "price",
+      "type": "quantitative",
+      "title": "价格 (USD)"
+    },
+    "y": {
+      "field": "number_of_reviews",
+      "type": "quantitative",
+      "title": "评论数量"
+    },
+    "color": {
+      "field": "price",
+      "type": "quantitative",
+      "scale": {
+        "scheme": "magma"
+      },
+      "title": "价格区间"
+    },
+    "order": {
+      "field": "price",
+      "type": "quantitative",
+      "sort": "ascending"
+    }
+  }
+}
